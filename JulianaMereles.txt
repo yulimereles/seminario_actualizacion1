@@ -1,0 +1,164 @@
+Respuestas del examen. 
+
+1. 
+No, un modelo no contiene todos los datos posibles existentes en el universo conocido para su entrenamiento. 
+Los modelos de aprendizaje automático se entrenan con un conjunto de datos limitado, que representa solo una muestra de todos los datos posibles.
+Los modelos de aprendizaje automático aprenden a generalizar a partir de los datos de entrenamiento proporcionados, y no contienen todo el conocimiento del universo. 
+El tamaño y la calidad de los datos de entrenamiento son factores clave que determinan qué tan bien un modelo puede generalizar y hacer predicciones en nuevos datos.
+Un modelo es una representación simplificada de la realidad, no una réplica exhaustiva de todo el conocimiento posible. El objetivo del entrenamiento de modelos es encontrar patrones y relaciones en los datos de entrenamiento disponibles, y luego aplicar esos aprendizajes a nuevos datos, no almacenar todos los datos existentes en el universo.
+2. 
+La función tf.tidy() permite ejecutar un bloque de código que crea y utiliza tensores de TensorFlow.js, 
+y asegura que todos los tensores creados dentro del bloque sean eliminados automáticamente cuando se completa la ejecución.
+Esto ayuda a evitar fugas de memoria, ya que los tensores pueden consumir una gran cantidad de memoria.
+
+La función tf.dispose() se utiliza para eliminar manualmente un tensor o un conjunto de tensores cuando ya no se necesitan. 
+Esto es útil cuando necesitas liberar memoria o cuando has creado tensores fuera de un bloque tf.tidy().
+
+3. 
+La diferencia entre el aprendizaje supervisado y el aprendizaje no supervisado es la siguiente:
+Aprendizaje supervisado: 
+Cuando tenemos datos etiquetados (es decir, los datos de entrada tienen una respuesta esperada), utilizamos aprendizaje supervisado. 
+El algoritmo aprende a partir de los datos de entrenamiento etiquetados y puede hacer predicciones para nuevos datos.
+
+Aprendizaje no supervisado: 
+Cuando no tenemos datos etiquetados, utilizamos aprendizaje no supervisado. 
+El algoritmo busca patrones y agrupaciones en los datos sin una respuesta esperada.
+
+Cuando no tenemos datos etiquetados de un problema en particular donde queremos implementar aprendizaje automático, 
+se recomienda utilizar aprendizaje no supervisado, como clustering o reducción de dimensionalidad, para encontrar estructuras y patrones en los datos sin la necesidad de etiquetas. 
+
+4. La diferencia entre una función síncrona y asíncrona en JavaScript es la siguiente:
+Función síncrona: 
+Una función síncrona se ejecuta de manera bloqueante, 
+lo que significa que el código se ejecuta línea por línea y el programa espera a que la función termine antes de continuar con la siguiente instrucción.
+
+Función asíncrona:
+Una función asíncrona no bloquea la ejecución del programa. 
+En su lugar, la función se ejecuta en segundo plano y se devuelve el control al programa principal. Cuando la función asíncrona finaliza, notifica al programa principal a través de un evento o una devolución de llamada.
+Las funciones asíncronas son importantes en JavaScript porque permiten que el programa siga ejecutándose mientras se realizan tareas lentas, como la comunicación con un servidor o la lectura de archivos, sin bloquear la interfaz de usuario.
+
+5. Correccion lista. 
+
+6. 
+Crea un index.html con el siguiente codigo:
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-layers"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Modelo Secuencial Simple</title>
+</head>
+
+<body class="d-flex flex-column  align-content-center mt-5 p-4">
+    <header class="text-center">
+        <h1 >TensorFlow.JS Example</h1>
+        <h2>Modelo Secuencial Simple</h2>
+    </header>
+    <main class="container p-3 border rounded-1 shadow ">
+        <section class=" text-center">
+            <h2>Entrenamiento</h2>
+            <button class="btn btn-outline-success" id="train">Entrenar Modelo</button>
+            <p id="loader" class="form-text"></p>
+        </section>
+        <section class="container mt-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="form">
+                        <div class="mb-3">
+                            <label for="x" class="form-label">Valor de X</label>
+                            <input type="number" class="form-control" id="x" name="x" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success">Calcular</button>
+                    </form>
+                </div>
+                <div id="result" class="col-md-6 mt-2 ">
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
+
+el segundo paso es crear una main.js con el siguiente codigo:
+const result = document.getElementById("result");
+const form = document.getElementById("form");
+const train = document.getElementById("train");
+const loader = document.getElementById("loader");
+const trainView = document.getElementById("trainView");
+
+let model;
+
+const leanrLinear = async () => {
+  const model = tf.sequential();
+  model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+  model.compile({ loss: "meanSquaredError", optimizer: "sgd" });
+  const xs = tf.tensor2d(
+    [-4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    [15, 1]
+);
+const ys = tf.tensor2d(
+    [-3, -1, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25],
+    [15, 1]
+);
+  const surface = { name: "show.history", tab: "Training" };
+  const history = [];
+
+  await model.fit(xs, ys, {
+    epochs: 500,
+    callbacks: {
+      onEpochEnd: async (epoch, logs) => {
+        console.log("Epoch: " + epoch + " Loss: " + logs.loss);
+        history.push(logs);
+        tfvis.show.history(surface, history, ["loss"]);
+      },
+    },
+  });
+  return model;
+};
+
+train.addEventListener("click", async () => {
+  loader.innerHTML = "Entrenando Modelo...(Esto puede tardar un poco)";
+  model = await leanrLinear();
+  loader.innerHTML = "Modelo Listo, formula y = 2x + 5";
+});
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  const x = parseFloat(data.get("x"));
+  result.classList.add("alert", "alert-primary");
+  if (isNaN(x)) {
+    result.innerHTML = "Por favor ingrese un número válido";
+    return;
+  }
+  if (!model) {
+    result.innerHTML =
+      "Por favor entrena el modelo antes de hacer una predicción.";
+    return;
+  }
+  const output = model.predict(tf.tensor2d([x], [1, 1]));
+  result.innerHTML = `
+        <p><span class="fw-bold">Resultado de predicción: </span>  ${
+          output.dataSync()[0]
+        } </p>
+        <p><span class="fw-bold">Resultado real: </span>  ${2 * x + 5}<p>
+        <p><span class="fw-bold">Error predicción: </span>  ${Math.abs(
+          2 * x + 5 - output.dataSync()[0]
+        )} </p>
+    `;
+});

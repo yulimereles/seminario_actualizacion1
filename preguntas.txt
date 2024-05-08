@@ -1,0 +1,18 @@
+Tema 1
+
+1 - ¿Un modelo contiene todos los datos posibles existentes en el universo conocido para su entrenamiento?.
+
+2 - Explique lo que permite hacer la función tf.tidy() y tf.dispose().
+
+3 - ¿Cuál es la diferencia entre el aprendizaje supervisado y el aprendizaje no supervisado?, 
+    cuando no tenemos datos etiquetados de un problema en particular donde queremos implementar 
+	aprendizaje automático, que tipo de aprendizaje se recomienda utilizar ?.
+
+4 – Explique la diferencia de Funcion Sincrona y Ascincrona 
+
+
+5 - Corrija el sistema Adjunto 	
+ 
+6 - Realice un sistema que entrene 525 épocas y que prediga el valor de Y para un 
+    valor x = 50 para la formula Y = 2X + 5 , ingresando para el entrenamiento 15 valores de pruebas 
+	comenzando por -4,  mostrando en pantalla el valor predicho de Y. Grafique la función de perdida.
