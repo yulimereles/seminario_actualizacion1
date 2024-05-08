@@ -1,0 +1,19 @@
+{
+  "name": "examen-1",
+  "version": "1.0.0",
+  "main": "servicio.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Para inicializar el proyecto:\r 1. npm init -Y\r 2. npm install\r 3. npm install express, cors y body-parser\r 4. cd ../examen\r 5. node servicio.js",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.19.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "path": "^0.12.7"
+  }
+}
